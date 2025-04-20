@@ -1,0 +1,32 @@
+
+🔍 SearchBar Behavior Tests
+	1.	✅ Input updates on user typing
+	•	When the user types into the input field, the value should reflect their input.
+	2.	✅ Pressing Enter triggers a search
+	•	When the user presses Enter, a search function should be called with the current input.
+	3.	✅ Search does nothing on empty input
+	•	If the input is empty and Enter is pressed, the search function should NOT be called.
+
+⸻
+
+🎬 App + Results Behavior Tests
+	4.	✅ Displays loading state
+	•	While fetching data from the API, a loading indicator should be shown.
+	5.	✅ Displays movie results after search
+	•	After a successful search, a list of matching movies should appear.
+	6.	✅ Shows “Movie not found” for unknown titles
+	•	If the search returns no results, a message should be shown indicating no match.
+	7.	✅ Handles API error
+	•	If the API call fails, an error message should be shown to the user.
+
+⸻
+
+🧹 Optional UX & Edge Tests
+	8.	✅ Input resets after search (optional)
+	•	After searching, the input field clears itself (if you choose to do that).
+	9.	✅ Results clear on new search
+	•	When a new search is made, old results are cleared before new ones are shown.
+	10.	✅ Whitespace input is ignored
+
+	•	Search with only spaces should not trigger the API.
+
