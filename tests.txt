@@ -1,7 +1,5 @@
 
-🔍 SearchBar Behavior Tests
-	1.	✅ Input updates on user typing
-	•	When the user types into the input field, the value should reflect their input.
+
 	2.	✅ Pressing Enter triggers a search
 	•	When the user presses Enter, a search function should be called with the current input.
 	3.	✅ Search does nothing on empty input
