@@ -6,10 +6,13 @@ import SearchBar from './components/SearchBar'
 function App() {
   const [movieQuery, setMovieQuery] = useState<string>('')
 
+  function handleSubmit() {
+    console.log('search for', movieQuery)
+  }
 
   return (
     <>
-      <SearchBar value={movieQuery} onChange={(newMovieQuery) => setMovieQuery(newMovieQuery)}/>
+      <SearchBar onSubmit={handleSubmit} value={movieQuery} onChange={setMovieQuery}/>
     </>
   )
 }

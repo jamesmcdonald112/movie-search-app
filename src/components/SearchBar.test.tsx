@@ -1,4 +1,4 @@
-import { describe, it, expect} from 'vitest'
+import { describe, it, expect, vi} from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import SearchBar from './SearchBar'
@@ -6,27 +6,53 @@ import { useState } from 'react'
 
 
 describe("SearchBar", () => {
-    it('renders the input bar on the screen', () => {
-        render(<SearchBar value="" onChange={() => {}}/>)
+
+    type MovieWrapperProps = {
+        onSubmit: (movieQuery: string) => void
+    }
+
+    function MovieWrapper({ onSubmit }: MovieWrapperProps) {
+        const [movieQuery, setMovieQuery] = useState<string>('')
+
+        return (
+            <SearchBar 
+                value={movieQuery} 
+                onChange={(newMovieQuery) => setMovieQuery(newMovieQuery)}
+                onSubmit={() => onSubmit(movieQuery)}
+            />
+        )
+    }
+    
+
+    it('renders an input with the correct placeholder text', () => {
+        render(<SearchBar onSubmit={() => {}} value="" onChange={() => {}}/>)
         const searchBar = screen.getByPlaceholderText(/search movie/i)
 
         expect(searchBar).toBeInTheDocument()
     })
 
-    it('updates the input field to reflect the users input', async () => {
+    it('updates the input value as the user types', async () => {
         const user = userEvent.setup()
 
-        const Wrapper = () => {
-            const [movieQuery, setMovieQuery] = useState('')
-            return <SearchBar value={movieQuery} onChange={setMovieQuery} />
-        }
-
-        render(<Wrapper />)
+        render(<MovieWrapper onSubmit={() => {}}/>)
         const searchBar = screen.getByPlaceholderText(/search movie/i)
 
         await user.type(searchBar, 'Django')
 
         expect(searchBar).toHaveValue('Django')
+
+    })
+
+    it('calls onSubmit with the input value when Enter is pressed', async () => {
+       const user = userEvent.setup()
+       const mockOnSubmit = vi.fn()
+       
+       render(<MovieWrapper onSubmit={mockOnSubmit}/>)
+       const searchBar = screen.getByPlaceholderText(/search movie/i)
+
+       await user.type(searchBar, 'Django{enter}')
+       expect(mockOnSubmit).toHaveBeenCalled()
+       expect(mockOnSubmit).toHaveBeenCalledWith('Django')
 
     })
 })

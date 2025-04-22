@@ -1,19 +1,26 @@
 type SearchBarProps = {
     value: string
     onChange: (newMovieQuery: string) => void
-
+    onSubmit: () => void
 }
 
-export default function SearchBar({ value, onChange }: SearchBarProps) {
+export default function SearchBar({ value, onChange, onSubmit }: SearchBarProps) {
+
+    function handleSubmit(e: React.FormEvent) {
+        e.preventDefault()
+        onSubmit()
+    }
     return (
-        <div>
-            <input 
-                type="text" 
-                placeholder="Search Movie"
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                />
+        <section>
+            <form  onSubmit={(e) => handleSubmit(e)}>
+                <input 
+                    type="text" 
+                    placeholder="Search Movie"
+                    value={value}
+                    onChange={(e) => onChange(e.target.value)}                    
+                    />
+            </form>
                 
-        </div>
+        </section>
     )
 }
