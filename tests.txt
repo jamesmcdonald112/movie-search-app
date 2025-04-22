@@ -1,9 +1,7 @@
 
 
-	2.	✅ Pressing Enter triggers a search
-	•	When the user presses Enter, a search function should be called with the current input.
-	3.	✅ Search does nothing on empty input
-	•	If the input is empty and Enter is pressed, the search function should NOT be called.
+
+
 
 ⸻
 

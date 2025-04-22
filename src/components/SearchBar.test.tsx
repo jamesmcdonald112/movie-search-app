@@ -55,4 +55,15 @@ describe("SearchBar", () => {
        expect(mockOnSubmit).toHaveBeenCalledWith('Django')
 
     })
+
+    it('does not call onSubmit when input is empty and Enter is pressed', async () => {
+        const user = userEvent.setup()
+        const mockOnSubmit = vi.fn()
+
+        render(<MovieWrapper onSubmit={mockOnSubmit} />)
+        const searchBar = screen.getByPlaceholderText(/search movie/i)
+
+        await user.type(searchBar, '{enter}')
+        expect(mockOnSubmit).not.toHaveBeenCalled()
+    })
 })
