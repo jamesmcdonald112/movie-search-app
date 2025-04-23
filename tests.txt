@@ -6,8 +6,7 @@
 ⸻
 
 🎬 App + Results Behavior Tests
-	4.	✅ Displays loading state
-	•	While fetching data from the API, a loading indicator should be shown.
+
 	5.	✅ Displays movie results after search
 	•	After a successful search, a list of matching movies should appear.
 	6.	✅ Shows “Movie not found” for unknown titles
