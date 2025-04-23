@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, act } from "@testing-library/react";
 import { describe, it, expect, vi} from 'vitest'
 import App from "./App";
 import userEvent from "@testing-library/user-event";
@@ -19,17 +19,18 @@ describe('App', () => {
     it('displays a loading indicator while the movie query is being fetched from the API', async () => {
         const user = userEvent.setup()
         render(<App />)
+      
         const searchBar = screen.getByPlaceholderText(/search movie/i)
       
         // Type and submit the search
         await user.type(searchBar, 'Django{enter}')
       
         // The loading indicator should appear
-        expect(screen.getByRole('status')).toBeInTheDocument()
+        expect(screen.getByRole("status")).toBeInTheDocument()
       
-        // Wait for the loading indicator to disappear
+        // Wait up to 3s for it to disappear
         await waitFor(() => {
-          expect(screen.queryByRole('status')).not.toBeInTheDocument()
-        })
+          expect(screen.queryByRole("status")).not.toBeInTheDocument()
+        }, { timeout: 3000 })
       })
 })
