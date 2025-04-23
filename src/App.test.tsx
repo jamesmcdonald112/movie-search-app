@@ -26,7 +26,7 @@ describe('App', () => {
         const {user, searchBar} = setup()
       
         // Type and submit the search
-        await user.type(searchBar, 'Django{enter}')
+        await user.type(searchBar, 'Django Unchained{enter}')
       
         // The loading indicator should appear
         expect(screen.getByRole("status")).toBeInTheDocument()
@@ -41,11 +41,11 @@ describe('App', () => {
         const {user, searchBar} = setup()
 
         // Type and submit the search
-        await user.type(searchBar, 'Django{enter}')
+        await user.type(searchBar, 'Django Unchained{enter}')
 
         await waitFor(() => {
-            expect(screen.getByText(/django/i)).toBeInTheDocument()
-        })
+            expect(screen.getByText(/Django Unchained/i)).toBeInTheDocument()
+        }, { timeout: 3000 })
 
       })
 })

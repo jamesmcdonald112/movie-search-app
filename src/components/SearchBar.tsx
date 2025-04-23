@@ -1,3 +1,5 @@
+
+
 type SearchBarProps = {
     value: string
     onChange: (newMovieQuery: string) => void
