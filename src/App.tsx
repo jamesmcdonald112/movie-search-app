@@ -23,6 +23,7 @@ function App() {
   const [isSearching, setIsSearching] = useState<boolean>(false)
   const [hasSearched, setHasSearched] = useState<boolean>(false)
   const [moviesList, setMoviesList] = useState<Movie[]>([])
+  const [hasError, setHasError] = useState<boolean>(false)
 
   function handleSubmit() {
     if(movieQuery.trim() === '') return
@@ -30,15 +31,24 @@ function App() {
     setHasSearched(true)
     setIsSearching(true)
 
-    // Simulate a fake API request with 2s delay
-    setTimeout(() => {
-      const results = moviesListExample.filter(movie => (
-        movie.title.toLowerCase().includes(movieQuery.toLowerCase())
-      ))
+    // Simulate a rejected API call
+    if(movieQuery === 'fail') {
+      setTimeout(() => {
+        setHasError(true)
+        setIsSearching(false)
+      }, 2000)
+    } else {
 
-      setMoviesList(results)
-      setIsSearching(false)
-    }, 2000);
+      // Simulate a successful API cal
+      setTimeout(() => {
+        const results = moviesListExample.filter(movie => (
+          movie.title.toLowerCase().includes(movieQuery.toLowerCase())
+        ))
+
+        setMoviesList(results)
+        setIsSearching(false)
+      }, 2000);
+  }
   }
 
   function displayMovies() {
@@ -68,8 +78,13 @@ function App() {
       )}
 
       {/* Movie not found */}
-      {!isSearching && hasSearched && moviesList.length === 0 && (
+      {!isSearching && !hasError && hasSearched && moviesList.length === 0 && (
         <p>Movie not found</p>
+      )}
+
+      {/* Error message */}
+      {!isSearching && hasSearched && hasError && (
+        <p>Something went wrong</p>
       )}
     </>
   )
