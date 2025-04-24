@@ -7,8 +7,7 @@
 
 🎬 App + Results Behavior Tests
 
-	6.	✅ Shows “Movie not found” for unknown titles
-	•	If the search returns no results, a message should be shown indicating no match.
+
 	7.	✅ Handles API error
 	•	If the API call fails, an error message should be shown to the user.
 

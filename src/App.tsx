@@ -29,7 +29,7 @@ function App() {
     
     setHasSearched(true)
     setIsSearching(true)
-    
+
     // Simulate a fake API request with 2s delay
     setTimeout(() => {
       const results = moviesListExample.filter(movie => (
@@ -67,6 +67,7 @@ function App() {
         </section>
       )}
 
+      {/* Movie not found */}
       {!isSearching && hasSearched && moviesList.length === 0 && (
         <p>Movie not found</p>
       )}

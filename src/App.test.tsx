@@ -59,4 +59,16 @@ describe('App', () => {
       }, { timeout: 3000 })
 
       })
+
+      it('displays an error message when the API call fails', async () => {
+        const {user, searchBar} = setup()
+
+        await user.type(searchBar, 'fail{enter}')
+
+        await waitFor(() => {
+          expect(screen.getByText(/something went wrong/i)).toBeInTheDocument()
+        }, { timeout: 3000})
+
+        expect(screen.queryByText(/movie not found/i)).not.toBeInTheDocument()
+      })
 })
