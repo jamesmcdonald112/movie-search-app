@@ -1,18 +1,4 @@
 
-
-
-
-
-⸻
-
-🎬 App + Results Behavior Tests
-
-
-	7.	✅ Handles API error
-	•	If the API call fails, an error message should be shown to the user.
-
-⸻
-
 🧹 Optional UX & Edge Tests
 	8.	✅ Input resets after search (optional)
 	•	After searching, the input field clears itself (if you choose to do that).

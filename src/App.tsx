@@ -30,8 +30,9 @@ function App() {
     
     setHasSearched(true)
     setIsSearching(true)
+    setHasError(false)
 
-    // Simulate a rejected API call
+    // Simulate API failure if query === 'fail'
     if(movieQuery === 'fail') {
       setTimeout(() => {
         setHasError(true)
@@ -48,7 +49,8 @@ function App() {
         setMoviesList(results)
         setIsSearching(false)
       }, 2000);
-  }
+    }
+    setMovieQuery('')
   }
 
   function displayMovies() {

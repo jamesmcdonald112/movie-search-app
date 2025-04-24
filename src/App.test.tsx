@@ -22,6 +22,16 @@ describe('App', () => {
        expect(logSpy).not.toHaveBeenCalled()
     })
 
+    it('clears the search bars input after searching', async () => {
+      const {user, searchBar} = setup()
+      
+      // Type and submit the search
+      await user.type(searchBar, 'Django Unchained{enter}')
+
+      expect(searchBar).toHaveValue('')
+
+    })
+
     it('displays a loading indicator while the movie query is being fetched from the API', async () => {
         const {user, searchBar} = setup()
       
