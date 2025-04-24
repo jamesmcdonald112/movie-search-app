@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { use, useState } from 'react'
 import './App.css'
 import SearchBar from './components/SearchBar'
 import type { Movie } from './types'
@@ -21,14 +21,22 @@ const moviesListExample = [
 function App() {
   const [movieQuery, setMovieQuery] = useState<string>('')
   const [isSearching, setIsSearching] = useState<boolean>(false)
+  const [hasSearched, setHasSearched] = useState<boolean>(false)
   const [moviesList, setMoviesList] = useState<Movie[]>([])
 
   function handleSubmit() {
     if(movieQuery.trim() === '') return
     
+    setHasSearched(true)
     setIsSearching(true)
+    
+    // Simulate a fake API request with 2s delay
     setTimeout(() => {
-      setMoviesList(moviesListExample)
+      const results = moviesListExample.filter(movie => (
+        movie.title.toLowerCase().includes(movieQuery.toLowerCase())
+      ))
+
+      setMoviesList(results)
       setIsSearching(false)
     }, 2000);
   }
@@ -57,6 +65,10 @@ function App() {
         <section aria-label='Movie Results'>
           {displayMovies()}
         </section>
+      )}
+
+      {!isSearching && hasSearched && moviesList.length === 0 && (
+        <p>Movie not found</p>
       )}
     </>
   )

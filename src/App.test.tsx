@@ -48,4 +48,15 @@ describe('App', () => {
         }, { timeout: 3000 })
 
       })
+
+      it('displays "Movie not found" message is the search query does not match any movies', async () => {
+        const {user, searchBar} = setup()
+
+        await user.type(searchBar, 'kjadsnfldskjanflsaf{enter}')
+
+        await waitFor(() => {
+          expect(screen.getByText(/movie not found/i)).toBeInTheDocument()
+      }, { timeout: 3000 })
+
+      })
 })

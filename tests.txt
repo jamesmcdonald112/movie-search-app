@@ -7,8 +7,6 @@
 
 🎬 App + Results Behavior Tests
 
-	5.	✅ Displays movie results after search
-	•	After a successful search, a list of matching movies should appear.
 	6.	✅ Shows “Movie not found” for unknown titles
 	•	If the search returns no results, a message should be shown indicating no match.
 	7.	✅ Handles API error
