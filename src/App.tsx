@@ -1,11 +1,12 @@
 
-import { use, useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import SearchBar from './components/SearchBar'
 import type { Movie } from './types'
 
 
-const apiKey = import.meta.env.VITE_MOVIE_API_KEY
+// const apiKey = import.meta.env.VITE_MOVIE_API_KEY
+// const fullUrl = `https://www.omdbapi.com/?apikey=${apiKey}`
 
 const moviesListExample = [
   {
