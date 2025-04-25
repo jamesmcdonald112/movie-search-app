@@ -2,22 +2,11 @@
 import { useState } from 'react'
 import './App.css'
 import SearchBar from './components/SearchBar'
-import type { Movie } from './types'
+import type { Movie, MovieApiResponse } from './types'
 
 
-// const apiKey = import.meta.env.VITE_MOVIE_API_KEY
-// const fullUrl = `https://www.omdbapi.com/?apikey=${apiKey}`
-
-const moviesListExample = [
-  {
-    id: '1',
-    title:'Django Unchained'
-  },
-  {
-    id: '2',
-    title:'More Django'
-  }
-]
+const apiKey: string = import.meta.env.VITE_MOVIE_API_KEY ?? ''
+const fullUrl: string = `https://www.omdbapi.com/?apikey=${apiKey}`
 
 function App() {
   const [movieQuery, setMovieQuery] = useState<string>('')
@@ -28,37 +17,54 @@ function App() {
 
   function handleSubmit() {
     if(movieQuery.trim() === '') return
-    
+
     setHasSearched(true)
     setIsSearching(true)
     setHasError(false)
 
-    // Simulate API failure if query === 'fail'
-    if(movieQuery === 'fail') {
-      setTimeout(() => {
-        setHasError(true)
-        setIsSearching(false)
-      }, 2000)
-    } else {
+    fetchMoviesByTitle()
 
-      // Simulate a successful API cal
-      setTimeout(() => {
-        const results = moviesListExample.filter(movie => (
-          movie.title.toLowerCase().includes(movieQuery.toLowerCase())
-        ))
+  }
 
-        setMoviesList(results)
-        setIsSearching(false)
-      }, 2000);
+  async function fetchMoviesByTitle() {
+    try {
+      const response: Response = await fetch(fullUrl.concat(`&s=${movieQuery}`))
+      
+      if(!response) {
+        throw new Error('Something went wrong fetching movies by title')
+      }
+
+      const data: MovieApiResponse = await response.json()
+      console.log('data from searching for movies:', data)
+
+      if(data.Response === 'False') {
+        if(data.Error === 'Movie not found!') {
+          setMoviesList([])
+          setHasError(false)
+          return
+        } else {
+          setHasError(true)
+          return
+        }
+      }
+
+      setMoviesList(data.Search || [])
+      
+
+    } catch (error) {
+      setHasError(true)
+      console.log("Error fetching movies by title:", error)
+    } finally {
+      setIsSearching(false)
+      setMovieQuery('')
     }
-    setMovieQuery('')
   }
 
   function displayMovies() {
     return (
-      moviesList.map(({id, title}) => (
-        <div key={id}>
-          <h2>{title}</h2>
+      moviesList.map(({imdbID, Title}) => (
+        <div key={imdbID}>
+          <h2>{Title}</h2>
         </div>
 
       ))
