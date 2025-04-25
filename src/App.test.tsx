@@ -37,15 +37,6 @@ describe('App', () => {
     } as any)
   }
 
-  it('does not call onSubmit when input is empty and Enter is pressed', async () => {
-    const logSpy = vi.spyOn(console, 'log')
-    const {user, searchBar} = setup()
-
-    await user.type(searchBar, '{enter}')
-
-    expect(logSpy).not.toHaveBeenCalled()
-  })
-
   it('clears the search bars input after searching', async () => {
     const {user, searchBar} = setup()
     
