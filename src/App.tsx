@@ -1,8 +1,7 @@
 
 import { useState } from 'react'
-import './App.css'
-import SearchBar from './components/SearchBar'
 import type { Movie, MovieApiResponse } from './types'
+import HeroHeader from './components/HeroHeader'
 
 
 const apiKey: string = import.meta.env.VITE_MOVIE_API_KEY ?? ''
@@ -73,8 +72,8 @@ function App() {
 
   return (
     <>
-      {/* Search Input */}
-      <SearchBar onSubmit={handleSubmit} value={movieQuery} onChange={setMovieQuery}/>
+      {/* Hero and Search Input */}
+      <HeroHeader onSubmit={handleSubmit} value={movieQuery} onChange={setMovieQuery}/>
 
       {/* Loading  */}
       {isSearching && <p role='status'>Searching...</p>}

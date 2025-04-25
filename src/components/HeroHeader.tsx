@@ -8,8 +8,29 @@ type HeroHeaderProps = {
 
 export default function HeroHeader({ value, onChange, onSubmit}: HeroHeaderProps) {
     return (
-        <section>
-            {<SearchBar value={value} onChange={onChange} onSubmit={onSubmit} />}
-        </section>
+        <>
+            <header className="
+                flex flex-col items-center justify-center w-full 
+                min-h-[220px] max-h-[334px] h-full
+                text-white
+                bg-[url(/images/hero-image-movie-search.jpg)] bg-cover bg-center
+                relative
+            ">
+                <div className="flex flex-col justify-end items-center mx-auto h-full">
+                    <img 
+                        src="/images/OMDb-logo.png" 
+                        alt="OMDb logo" 
+                        className="w-70 mb-10"
+                    />
+                </div>
+            </header>
+
+            <div className="
+                flex justify-center 
+                relative 
+                -translate-y-1/2 transform z-10">
+                <SearchBar value={value} onChange={onChange} onSubmit={onSubmit} />
+            </div>
+        </>
     )
 }
