@@ -26,10 +26,14 @@ export default function HeroHeader({ value, onChange, onSubmit}: HeroHeaderProps
             </header>
 
             <div className="
-                flex justify-center 
-                relative 
-                -translate-y-1/2 transform z-10">
-                <SearchBar value={value} onChange={onChange} onSubmit={onSubmit} />
+                flex justify-center
+                relative -translate-y-1/2 transform z-10
+                px-3
+                "
+            >
+                <div className="w-full max-w-[700px]">
+                    <SearchBar value={value} onChange={onChange} onSubmit={onSubmit} />
+                </div>
             </div>
         </>
     )

@@ -16,7 +16,7 @@ export default function SearchBar({ value, onChange, onSubmit }: SearchBarProps)
     return (
             <form  
                 onSubmit={(e) => handleSubmit(e)}
-                className="w-full mx-3"
+                className="w-full"
             >
                 <div className="relative w-full">
                     <img 
