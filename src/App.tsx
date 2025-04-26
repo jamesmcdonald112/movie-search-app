@@ -106,11 +106,8 @@ function App() {
 
   function displayMovies() {
     return (
-      moviesList.map(({imdbID, Title}) => (
-        <div key={imdbID}>
-          <h2>{Title}</h2>
-        </div>
-
+      moviesList.map((movie: MovieSearchResult) => (
+        <MovieCard movie={movie} />
       ))
     )
   }
@@ -119,7 +116,7 @@ function App() {
     <>
       {/* Hero and Search Input */}
       <HeroHeader onSubmit={handleSubmit} value={movieQuery} onChange={setMovieQuery}/>
-
+      
 
       <Main>
         {/* Loading  */}
@@ -127,11 +124,10 @@ function App() {
 
         {/* Movie Results */}
         {!isSearching && moviesList.length > 0 && (
-          <section aria-label='Movie Results'>
+          <section aria-label='Movie Results' className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mx-5'>
             {displayMovies()}
           </section>
         )}
-        <MovieCard movie={mockMovie}/>
         
         {/* Movie not found */}
         {!isSearching && !hasError && hasSearched && moviesList.length === 0 && (
