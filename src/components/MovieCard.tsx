@@ -1,5 +1,3 @@
-
-
 import type { MovieSearchResult } from "../types"
 
 type MovieCardProps = {
@@ -15,7 +13,14 @@ export default function MovieCard({ movie }: MovieCardProps) {
             p-6
             h-[250px]
             bg-transparent 
-            border border-[#20293A] border-[3px] rounded-xl            
+            border border-[#20293A] border-[3px] 
+            rounded-xl 
+            cursor-pointer
+            hover:bg-[#1A2238]
+            hover:border-white  
+            hover:shadow-lg
+            hover:-translate-y-2 
+            transition-all duration-500        
         ">
             <img 
                 src={Poster} 
