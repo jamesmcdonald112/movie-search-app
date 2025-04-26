@@ -4,6 +4,7 @@ import type { MovieSearchResult, MovieApiResponse } from './types'
 import HeroHeader from './components/HeroHeader'
 import MovieCard from './components/MovieCard'
 import Main from './components/Main'
+import Spinner from './components/Spinner'
 
 
 
@@ -120,7 +121,7 @@ function App() {
 
       <Main>
         {/* Loading  */}
-        {isSearching && <p role='status'>Searching...</p>}
+        {isSearching && <Spinner />}
 
         {/* Movie Results */}
         {!isSearching && moviesList.length > 0 && (
@@ -131,12 +132,16 @@ function App() {
         
         {/* Movie not found */}
         {!isSearching && !hasError && hasSearched && moviesList.length === 0 && (
-          <p>Movie not found</p>
+          <div className='flex justify-center items-center min-h-[300px]'>
+            <p className='text-[#97A3B6] text-lg font-bold'>Movie not found</p>
+          </div>
         )}
 
         {/* Error message */}
         {!isSearching && hasSearched && hasError && (
-          <p>Something went wrong</p>
+          <div className='flex justify-center items-center min-h-[300px]'>
+            <p className='text-[#97A3B6] text-lg font-bold'>Something went wrong</p>
+          </div>
         )}
       </Main>
 
