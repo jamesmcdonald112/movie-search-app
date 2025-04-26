@@ -1,8 +1,53 @@
 
 import { useState } from 'react'
-import type { Movie, MovieApiResponse } from './types'
+import type { MovieSearchResult, MovieApiResponse } from './types'
 import HeroHeader from './components/HeroHeader'
+import MovieCard from './components/MovieCard'
+import Main from './components/Main'
 
+
+
+// Delete this
+const mockMovie = {
+  "Title":"Django",
+  "Year":"1966",
+  "Rated":"R",
+  "Released":"01 Dec 1966",
+  "Runtime":"91 min",
+  "Genre":"Action, Drama, Western",
+  "Director":"Sergio Corbucci",
+  "Writer":"Sergio Corbucci, Bruno Corbucci, Franco Rossetti",
+  "Actors":"Franco Nero, José Canalejas, José Bódalo",
+  "Plot":"A coffin-dragging gunslinger and a prostitute become embroiled in a bitter feud between a Klan of Southern racists and a band of Mexican Revolutionaries.",
+  "Language":"Italian",
+  "Country":"Italy, Spain",
+  "Awards":"N/A",
+  "Poster":"https://m.media-amazon.com/images/M/MV5BZWVmN2NjOTMtMjZiNy00NDU2LTk3OTgtODFkYWQ2MDFiYzAwXkEyXkFqcGc@._V1_SX300.jpg",
+  "Ratings":[
+     {
+        "Source":"Internet Movie Database",
+        "Value":"7.2/10"
+     },
+     {
+        "Source":"Rotten Tomatoes",
+        "Value":"94%"
+     },
+     {
+        "Source":"Metacritic",
+        "Value":"75/100"
+     }
+  ],
+  "Metascore":"75",
+  "imdbRating":"7.2",
+  "imdbVotes":"32,133",
+  "imdbID":"tt0060315",
+  "Type":"movie",
+  "DVD":"N/A",
+  "BoxOffice":"$25,916",
+  "Production":"N/A",
+  "Website":"N/A",
+  "Response":"True"
+}
 
 const apiKey: string = import.meta.env.VITE_MOVIE_API_KEY ?? ''
 const fullUrl: string = `https://www.omdbapi.com/?apikey=${apiKey}`
@@ -11,7 +56,7 @@ function App() {
   const [movieQuery, setMovieQuery] = useState<string>('')
   const [isSearching, setIsSearching] = useState<boolean>(false)
   const [hasSearched, setHasSearched] = useState<boolean>(false)
-  const [moviesList, setMoviesList] = useState<Movie[]>([])
+  const [moviesList, setMoviesList] = useState<MovieSearchResult[]>([])
   const [hasError, setHasError] = useState<boolean>(false)
 
   function handleSubmit() {
@@ -75,25 +120,30 @@ function App() {
       {/* Hero and Search Input */}
       <HeroHeader onSubmit={handleSubmit} value={movieQuery} onChange={setMovieQuery}/>
 
-      {/* Loading  */}
-      {isSearching && <p role='status'>Searching...</p>}
 
-      {/* Movie Results */}
-      {!isSearching && moviesList.length > 0 && (
-        <section aria-label='Movie Results'>
-          {displayMovies()}
-        </section>
-      )}
+      <Main>
+        {/* Loading  */}
+        {isSearching && <p role='status'>Searching...</p>}
 
-      {/* Movie not found */}
-      {!isSearching && !hasError && hasSearched && moviesList.length === 0 && (
-        <p>Movie not found</p>
-      )}
+        {/* Movie Results */}
+        {!isSearching && moviesList.length > 0 && (
+          <section aria-label='Movie Results'>
+            {displayMovies()}
+          </section>
+        )}
+        <MovieCard movie={mockMovie}/>
+        
+        {/* Movie not found */}
+        {!isSearching && !hasError && hasSearched && moviesList.length === 0 && (
+          <p>Movie not found</p>
+        )}
 
-      {/* Error message */}
-      {!isSearching && hasSearched && hasError && (
-        <p>Something went wrong</p>
-      )}
+        {/* Error message */}
+        {!isSearching && hasSearched && hasError && (
+          <p>Something went wrong</p>
+        )}
+      </Main>
+
     </>
   )
 }

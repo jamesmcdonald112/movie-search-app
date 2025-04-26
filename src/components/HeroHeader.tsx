@@ -24,7 +24,6 @@ export default function HeroHeader({ value, onChange, onSubmit}: HeroHeaderProps
                     />
                 </div>
             </header>
-
             <div className="
                 flex justify-center
                 relative -translate-y-1/2 transform z-10
