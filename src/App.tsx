@@ -13,7 +13,6 @@ const fullUrl: string = `https://www.omdbapi.com/?apikey=${apiKey}`
 function App() {
   const [movieQuery, setMovieQuery] = useState<string>('')
   const [isSearching, setIsSearching] = useState<boolean>(false)
-  const [isFetchingDetails, setIsFetchingDetails] = useState(false)
   const [hasSearched, setHasSearched] = useState<boolean>(false)
   const [moviesList, setMoviesList] = useState<MovieSearchResult[]>([])
   const [selectedMovie, setSelectedMovie] = useState<MovieDetail | null>(null)
