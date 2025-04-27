@@ -2,13 +2,15 @@ import type { MovieSearchResult } from "../types"
 
 type MovieCardProps = {
     movie: MovieSearchResult
+    onSelectMovie: (imdbID: string) => void
 }
 
-export default function MovieCard({ movie }: MovieCardProps) {
+export default function MovieCard({ movie, onSelectMovie }: MovieCardProps) {
     const {Poster, Title, Type, Year} = movie
 
     return (
         <div 
+            onClick={() => onSelectMovie(movie.imdbID)}
             className="
             flex gap-6
             p-6
