@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import MovieCard from "./MovieCard";
 import { render, screen } from "@testing-library/react";
 import { MovieSearchResult } from "../types";
@@ -13,7 +13,7 @@ describe('MovieCard', () => {
     }
     
     beforeEach(() => {
-        render(<MovieCard movie={mockMovie} />)
+        render(<MovieCard movie={mockMovie} onSelectMovie={vi.fn()}/>)
     })
 
     it('renders the movie title', () => {
