@@ -1,6 +1,6 @@
 
 import { useState } from 'react'
-import type { MovieSearchResult, MovieApiResponse } from './types'
+import type { MovieSearchResult, MovieApiResponse, MovieDetail } from './types'
 import HeroHeader from './components/HeroHeader'
 import MovieCard from './components/MovieCard'
 import Main from './components/Main'
@@ -108,7 +108,7 @@ function App() {
   function displayMovies() {
     return (
       moviesList.map((movie: MovieSearchResult) => (
-        <MovieCard movie={movie} />
+        <MovieCard movie={movie}/>
       ))
     )
   }

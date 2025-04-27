@@ -8,7 +8,8 @@ export default function MovieCard({ movie }: MovieCardProps) {
     const {Poster, Title, Type, Year} = movie
 
     return (
-        <div className="
+        <div 
+            className="
             flex gap-6
             p-6
             h-[250px]

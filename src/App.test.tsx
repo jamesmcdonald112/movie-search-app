@@ -132,6 +132,36 @@ describe('App', () => {
     await waitFor(() => {
       expect(screen.getByText(/something went wrong/i)).toBeInTheDocument()
     })
-
   })
+
+  it('fetches and displays movie details when a card is clicked', async () => {
+    const {user, searchBar} = setup()
+
+    await user.type(searchBar, 'Django Unchained{enter}')
+
+    await waitFor(() => {
+      expect(screen.getByText(/django unchained/i)).toBeInTheDocument()
+    })
+
+    // Mock the second fetch (movie details) after clicking
+    vi.spyOn(window, 'fetch').mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({
+        Title: "Django Unchained",
+        Plot: "A freed slave sets out to rescue his wife from a brutal plantation owner.",
+        imdbID: "5u3485u3948u5349",
+        Year: "2012",
+        Type: "movie",
+        Poster: "some-poster-url"
+      })
+    } as any)
+
+    await user.click(screen.getByText(/django unchained/i))
+
+    await waitFor(() => {
+      expect(screen.getByText(/a freed slave sets out to rescue his wife/i)).toBeInTheDocument()
+    })
+  })
+
+
 })
